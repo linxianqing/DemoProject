@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chance.ssm.mapper.tsbAboutWeMapper">
+  <resultMap id="BaseResultMap" type="com.chance.ssm.po.tsbAboutWe">
+    <id column="about_we_id" jdbcType="INTEGER" property="aboutWeId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="company_brief" jdbcType="VARCHAR" property="companyBrief" />
+    <result column="team_brief" jdbcType="VARCHAR" property="teamBrief" />
+    <result column="we_phone" jdbcType="VARCHAR" property="wePhone" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="we_img1" jdbcType="VARCHAR" property="weImg1" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    about_we_id, title, company_brief, team_brief, we_phone, type, we_img1
+  </sql>
+  <select id="selectByExample" parameterType="com.chance.ssm.po.tsbAboutWeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tsb_about_we
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tsb_about_we
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tsb_about_we
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chance.ssm.po.tsbAboutWeExample">
+    delete from tsb_about_we
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chance.ssm.po.tsbAboutWe">
+    insert into tsb_about_we (about_we_id, title, company_brief, 
+      team_brief, we_phone, type, 
+      we_img1)
+    values (#{aboutWeId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{companyBrief,jdbcType=VARCHAR}, 
+      #{teamBrief,jdbcType=VARCHAR}, #{wePhone,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{weImg1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chance.ssm.po.tsbAboutWe">
+    insert into tsb_about_we
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aboutWeId != null">
+        about_we_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="companyBrief != null">
+        company_brief,
+      </if>
+      <if test="teamBrief != null">
+        team_brief,
+      </if>
+      <if test="wePhone != null">
+        we_phone,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="weImg1 != null">
+        we_img1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aboutWeId != null">
+        #{aboutWeId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBrief != null">
+        #{companyBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="teamBrief != null">
+        #{teamBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="wePhone != null">
+        #{wePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="weImg1 != null">
+        #{weImg1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chance.ssm.po.tsbAboutWeExample" resultType="java.lang.Integer">
+    select count(*) from tsb_about_we
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chance.ssm.po.tsbAboutWe">
+    update tsb_about_we
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBrief != null">
+        company_brief = #{companyBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="teamBrief != null">
+        team_brief = #{teamBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="wePhone != null">
+        we_phone = #{wePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="weImg1 != null">
+        we_img1 = #{weImg1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chance.ssm.po.tsbAboutWe">
+    update tsb_about_we
+    set title = #{title,jdbcType=VARCHAR},
+      company_brief = #{companyBrief,jdbcType=VARCHAR},
+      team_brief = #{teamBrief,jdbcType=VARCHAR},
+      we_phone = #{wePhone,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      we_img1 = #{weImg1,jdbcType=VARCHAR}
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.chance.ssm.po.tsbAboutWe">
+    <id column="about_we_id" jdbcType="INTEGER" property="aboutWeId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="company_brief" jdbcType="VARCHAR" property="companyBrief" />
+    <result column="team_brief" jdbcType="VARCHAR" property="teamBrief" />
+    <result column="we_phone" jdbcType="VARCHAR" property="wePhone" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="we_img1" jdbcType="VARCHAR" property="weImg1" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    about_we_id, title, company_brief, team_brief, we_phone, type, we_img1
+  </sql>
+  <select id="selectByExample" parameterType="com.chance.ssm.po.tsbAboutWeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tsb_about_we
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tsb_about_we
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tsb_about_we
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chance.ssm.po.tsbAboutWeExample">
+    delete from tsb_about_we
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chance.ssm.po.tsbAboutWe">
+    insert into tsb_about_we (about_we_id, title, company_brief, 
+      team_brief, we_phone, type, 
+      we_img1)
+    values (#{aboutWeId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{companyBrief,jdbcType=VARCHAR}, 
+      #{teamBrief,jdbcType=VARCHAR}, #{wePhone,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{weImg1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chance.ssm.po.tsbAboutWe">
+    insert into tsb_about_we
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aboutWeId != null">
+        about_we_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="companyBrief != null">
+        company_brief,
+      </if>
+      <if test="teamBrief != null">
+        team_brief,
+      </if>
+      <if test="wePhone != null">
+        we_phone,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="weImg1 != null">
+        we_img1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aboutWeId != null">
+        #{aboutWeId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBrief != null">
+        #{companyBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="teamBrief != null">
+        #{teamBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="wePhone != null">
+        #{wePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="weImg1 != null">
+        #{weImg1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chance.ssm.po.tsbAboutWeExample" resultType="java.lang.Integer">
+    select count(*) from tsb_about_we
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chance.ssm.po.tsbAboutWe">
+    update tsb_about_we
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBrief != null">
+        company_brief = #{companyBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="teamBrief != null">
+        team_brief = #{teamBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="wePhone != null">
+        we_phone = #{wePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="weImg1 != null">
+        we_img1 = #{weImg1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chance.ssm.po.tsbAboutWe">
+    update tsb_about_we
+    set title = #{title,jdbcType=VARCHAR},
+      company_brief = #{companyBrief,jdbcType=VARCHAR},
+      team_brief = #{teamBrief,jdbcType=VARCHAR},
+      we_phone = #{wePhone,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      we_img1 = #{weImg1,jdbcType=VARCHAR}
+    where about_we_id = #{aboutWeId,jdbcType=INTEGER}
+  </update>
+</mapper>
